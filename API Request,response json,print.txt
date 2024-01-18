@@ -1,0 +1,63 @@
+1.API Request using get
+import requests
+response = requests.get("https://en.wikipedia.org/wiki/Jawan_(film)")
+print(response.status_code)
+
+output:-
+200
+
+2.Use response.json() using requests
+import requests
+response = requests.get("https://api.github.com/") 
+print(response.status_code)
+print(response.json())
+
+output:-
+200
+{'current_user_url': 'https://api.github.com/user', 'current_user_authorizations_html_url': 'https://github.com/settings/connections/applications{/client_id}', 'authorizations_url': 'https://api.github.com/authorizations', 'code_search_url': 'https://api.github.com/search/code?q={query}{&page,per_page,sort,order}', 'commit_search_url': 'https://api.github.com/search/commits?q=...................................'https://api.github.com/user/starred{/owner}{/repo}', 'starred_gists_url': 'https://api.github.com/gists/starred', 'topic_search_url': 'https://api.github.com/search/topics?q={query}{&page,per_page}', 'user_url': 'https://api.github.com/users/{user}', 'user_organizations_url': 'https://api.github.com/user/orgs', 'user_repositories_url': 'https://api.github.com/users/{user}/repos{?type,page,per_page,sort}', 'user_search_url': 'https://api.github.com/search/users?q={query}{&page,per_page,sort,order}'}
+
+3.Use response.json() to print formatted string
+import requests
+import json
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, sort_keys=True, indent=4)
+    print(text)
+response=requests.get('https://api.github.com/users/naveenkrnl')
+jprint(response.json())
+
+output:-
+{
+    "avatar_url": "https://avatars.githubusercontent.com/u/42272662?v=4",
+    "bio": "A person known by deeds",
+    "blog": "",
+    "company": null,
+    "created_at": "2018-08-10T12:53:15Z",
+    "email": null,
+    "events_url": "https://api.github.com/users/naveenkrnl/events{/privacy}",
+    "followers": 33,
+    "followers_url": "https://api.github.com/users/naveenkrnl/followers",
+    "following": 7,
+    "following_url": "https://api.github.com/users/naveenkrnl/following{/other_user}",
+    "gists_url": "https://api.github.com/users/naveenkrnl/gists{/gist_id}",
+    "gravatar_id": "",
+    "hireable": true,
+    "html_url": "https://github.com/naveenkrnl",
+    "id": 42272662,
+    "location": "karnal, Haryana",
+    "login": "naveenkrnl",
+    "name": "Naveen Arora",
+    "node_id": "MDQ6VXNlcjQyMjcyNjYy",
+    "organizations_url": "https://api.github.com/users/naveenkrnl/orgs",
+    "public_gists": 0,
+    "public_repos": 33,
+    "received_events_url": "https://api.github.com/users/naveenkrnl/received_events",
+    "repos_url": "https://api.github.com/users/naveenkrnl/repos",
+    "site_admin": false,
+    "starred_url": "https://api.github.com/users/naveenkrnl/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/naveenkrnl/subscriptions",
+    "twitter_username": null,
+    "type": "User",
+    "updated_at": "2024-01-09T16:22:51Z",
+    "url": "https://api.github.com/users/naveenkrnl"
+}

@@ -1,0 +1,152 @@
+1.Implement data visualisation using matpolotlib and seaborn
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# reading the database
+data = pd.read_csv("tips.csv")
+
+# histogram of total_bills
+plt.hist(data["total_bill"])
+
+plt.title("Histogram")
+
+# Adding the legends
+plt.show()
+
+
+# draw lineplot
+sns.lineplot(x="sex", y="total_bill", data=data)
+
+# setting the title using Matplotlib
+plt.title("Title using Matplotlib Function")
+
+plt.show()
+
+# scatterplot
+sns.scatterplot(
+    x="day",
+    y="tip",
+    data=data,
+)
+
+plt.show()
+
+# sactter plot
+sns.scatterplot(x="day", y="tip", data=data, hue="sex")
+plt.show()
+
+# line plot
+sns.lineplot(x="day", y="tip", data=data)
+plt.show()
+
+# using only data attribute
+sns.lineplot(data=data.drop(["total_bill"], axis=1))
+plt.show()
+
+# bar plot
+sns.barplot(x="day", y="tip", data=data, hue="sex")
+
+plt.show()
+
+# hist
+sns.histplot(x="total_bill", data=data, kde=True, hue="sex")
+
+plt.show()
+
+output:-
+***8 graphs will be shown***
+
+single program
+
+1.
+import pandas as pd
+import matplotlib.pyplot as plt
+# reading the database
+data = pd.read_csv("tips.csv")
+# histogram of total_bills
+plt.hist(data["total_bill"])
+plt.title("Histogram")
+# Adding the legends
+plt.show()
+
+2.
+# importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+# draw lineplot
+sns.lineplot(x="sex", y="total_bill", data=data)
+# setting the title using Matplotlib
+plt.title("Title using Matplotlib Function")
+plt.show()
+
+3.
+# importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+sns.scatterplot(
+    x="day",
+    y="tip",
+    data=data,
+)
+plt.show()
+
+4.
+# importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+sns.scatterplot(x="day", y="tip", data=data, hue="sex")
+plt.show()
+
+5.
+# importing packages *line plot
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+sns.lineplot(x="day", y="tip", data=data)
+plt.show()
+
+6.
+# importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+# using only data attribute
+sns.lineplot(data=data.drop(["total_bill"], axis=1))
+plt.show()
+
+7.
+# importing packages
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+sns.barplot(x="day", y="tip", data=data, hue="sex")
+plt.show()
+
+8.
+# importing packages *histogram
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+# reading the database
+data = pd.read_csv("tips.csv")
+sns.histplot(x="total_bill", data=data, kde=True, hue="sex")
+plt.show()
+
+
+

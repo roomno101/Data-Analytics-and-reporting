@@ -1,0 +1,65 @@
+1.Requests making get request
+import requests
+r=requests.get('https://www.google.com')
+print(r)
+print(r.content)
+
+output:-
+<Response [200]>
+b'<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="en-IN"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="/images/branding/googleg/1x/googleg_standard_color_128dp.png" itemprop="image"><title>Google</title><script nonce="H1cNMTe5MOoSf2-hXlzgZg">(function(){var _g={kEI:\'qGOhZbDIIeugvr0Pj8OiSA..................................1:u("Trident")||u("MSIE");y();x();w();Object.freeze(new function(){});Object.freeze(new function(){});var A=!z&&!w(),D=function(a){if(/-[a-z]/.test("ved"))return null;if(A&&a.dataset){if(y()&&!("ved"in a.dataset))return null;a=a.dataset.ved;return void 0===a?null:a}return a.getAttribute("data-"+"ved".replace(/([A-Z])/g,"-$1").toLowerCase())};var E=[],F=null;function G(a){a=a.target;var c=performance.now(),f=[],H=f.concat,d=E;if(!(d instanceof Array)){var m="undefined"!=typeof Symbol&&Symbol.iterator&&d[Symbol.iterator];if(m)d=m.call(d);else if("number"==typeof d.length)d={next:b(d)};else throw Error("a`"+String(d));for(var B=[];!(m=d.next()).done;)B.push(m.value);d=B}E=H.call(f,d,[c]);if(a&&a instanceof HTMLElement)if(a===F){if(c=4<=E.length)c=5>(E[E.length-1]-E[E.length-4])/1E3;if(c){c=google.getEI(a);a.hasAttribute("data-ved")?f=a?D(a)||"":"":f=(f=\na.closest("[data-ved]"))?D(f)||"":"";f=f||"";if(a.hasAttribute("jsname"))a=a.getAttribute("jsname");else{var C;a=null==(C=a.closest("[jsname]"))?void 0:C.getAttribute("jsname")}google.log("rcm","&ei="+c+"&ved="+f+"&jsname="+(a||""))}}else F=a,E=[c]}window.document.addEventListener("DOMContentLoaded",function(){document.body.addEventListener("click",G)});}).call(this);</script></body></html>'
+
+2.Requests to response for url
+import requests
+r=requests.get('https://en.wikipedia.org/wiki/Jawan_(film)')
+print(r.url)
+print(r.status_code)
+
+output:-
+https://en.wikipedia.org/wiki/Jawan_(film)
+200
+
+3.Parsing the HTML using beautifulsoup
+import requests
+from bs4 import BeautifulSoup
+r=requests.get('https://en.wikipedia.org/wiki/Jawan_(film)')
+print(r)
+soup=BeautifulSoup(r.content,'html.parser')
+print(soup.prettify())
+
+output:-
+<Response [200]>
+<!DOCTYPE html>
+<html class="client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-sticky-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-zebra-design-enabled vector-feature-custom-font-size-clientpref-0 vector-feature-client-preferences-disabled vector-feature-client-prefs-pinned-disabled vector-toc-available" dir="ltr" lang="en">
+ <head>
+................
+\/upload.wikimedia.org\/wikipedia\/en\/3\/39\/Jawan_film_poster.jpg","headline":"2023 film directed by Atlee"}
+  </script>
+ </body>
+</html>
+
+4.Web Scraping program to extract title from a web page
+import requests
+from bs4 import BeautifulSoup
+r=requests.get('https://en.wikipedia.org/wiki/Jawan_(film)')
+soup=BeautifulSoup(r.content,'html.parser')
+print(soup.title)
+print(soup.title.name)
+print(soup.title.parent.name)
+
+output:-
+<title>Jawan (film) - Wikipedia</title>
+title
+head
+
+5.Finding elements by class from a webpage
+import requests
+from bs4 import BeautifulSoup
+r=requests.get('https://www.geeksforgeeks.org/python-programming-language/')
+soup=BeautifulSoup(r.content,'html.parser')
+s=soup.find('div',class_='entry-content')
+content=s.find_all('p')
+print(content)
+
+output:-
+[<p>This Python Tutorial is very well suited for Beginners, and also for experienced programmers with other programming languages like C++ and Java. This specially designed free Python tutorial will help you learn Python Programming Language in the most efficient way, with topics from basics to advanced (like Web-scraping, Django, Deep-Learning, etc.) with examples. </p>, <p><span id="more-136942"></span></p>, <p><img alt="Python Tutorial" class="alignnone size-full wp-image-973034" height="470" sizes="(max-width: 1000px) 100vw, 1000px" src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20230305181456/Python4.png" srcset="https://media.geeksforgeeks.org/wp-content/cdn-uploads.....................................................rel="noopener" target="_blank">Python</a> applications in 2024:</p>, <p><strong>Note: </strong>These latest applications are all still under development, but they show the potential of Python for creating new and innovative applications.</p>, <p> Readers of this beginner’s Python tutorial are expected to have a reasonable familiarity with programming environments and basic concepts such as variables, commands, and syntax.</p>, <p>Python’s reputation for ease of use stems from its clear, English-like syntax, intuitive structure, and emphasis on readability. It prioritizes simplicity and clarity, making it approachable for beginners and experienced programmers alike. </p>, <p>Yes, it is possible to learn Python in a month. However, it will depend on how much time you can dedicate to learning the language and how quickly you can grasp new concepts.</p>, <p>Well, to become a proficient in Python programming language, it will take around a year. And it will totally depends on your programming skills and understanding. </p>, <p>To start Python programming you can follow below steps:</p>, <p>
+Here’s a comprehensive overview of Python’s diverse applications:</p>, <p></p>]

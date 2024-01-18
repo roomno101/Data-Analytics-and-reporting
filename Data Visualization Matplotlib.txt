@@ -1,0 +1,66 @@
+1.Print top rows and Implementation of data visualisation using matplotlib
+#implementation of data visualisation using matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+# reading the database
+data = pd.read_csv("tips.csv")
+
+#printing the top 10 rows
+print(data.head(10))
+
+#Scatter Plot
+# Scatter plot with day against tip
+plt.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
+ 
+# Adding Title to the Plot
+plt.title("Scatter Plot")
+
+# Setting the X and Y labels
+plt.xlabel('Day')
+plt.ylabel('Tip')
+
+plt.colorbar()
+
+plt.show()
+
+#Line Chart
+# Scatter plot with day against tip
+plt.plot(data['tip'])
+plt.plot(data['size'])
+ 
+# Adding Title to the Plot
+plt.title("Line Chart")
+ 
+# Setting the X and Y labels
+plt.xlabel('Day')
+plt.ylabel('Tip')
+ 
+plt.show()
+
+#Bar Chart
+# Bar chart with day against tip
+plt.bar(data['day'], data['tip'])
+ 
+plt.title("Bar Chart")
+ 
+# Setting the X and Y labels
+plt.xlabel('Day')
+plt.ylabel('Tip')
+ 
+# Adding the legends
+plt.show()
+
+output:-
+   total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+5       25.29  4.71    Male     No  Sun  Dinner     4
+6        8.77  2.00    Male     No  Sun  Dinner     2
+7       26.88  3.12    Male     No  Sun  Dinner     4
+8       15.04  1.96    Male     No  Sun  Dinner     2
+9       14.78  3.23    Male     No  Sun  Dinner     2
+
+****3 graphs will be shown****

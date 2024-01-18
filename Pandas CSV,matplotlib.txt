@@ -1,0 +1,65 @@
+1.Read csv file using pandas
+import pandas as pd
+Df = pd.read_csv("demo.csv")
+print(Df)
+print(Df.describe())
+print(Df["Period"].value_counts())
+
+output:-
+      Series_reference   Period  ...  Series_title_4 Series_title_5
+0          BDCQ.SEA1AA  2011.06  ...             NaN            NaN
+1          BDCQ.SEA1AA  2011.09  ...             NaN            NaN
+2          BDCQ.SEA1AA  2011.12  ...             NaN            NaN
+3          BDCQ.SEA1AA  2012.03  ...             NaN            NaN
+4          BDCQ.SEA1AA  2012.06  ...             NaN            NaN
+               ...      ...  ...             ...            ...
+21797    BDCQ.SEE3999A  2017.06  ...             NaN            NaN
+21798    BDCQ.SEE3999A  2017.09  ...             NaN            NaN
+21799    BDCQ.SEE3999A  2017.12  ...             NaN            NaN
+21800    BDCQ.SEE3999A  2018.03  ...             NaN            NaN
+21801    BDCQ.SEE3999A  2018.06  ...             NaN            NaN
+
+[21802 rows x 14 columns]
+             Period    Data_value     Magnitude  Series_title_4  Series_title_5
+count  21802.000000  1.896300e+04  21802.000000             0.0             0.0
+mean    2016.786102  7.200201e+04      2.337309             NaN             NaN
+std        3.490701  2.082260e+05      2.925958             NaN             NaN
+min     2011.060000  1.187001e+00      0.000000             NaN             NaN
+25%     2014.030000  1.851044e+03      0.000000             NaN             NaN
+50%     2017.030000  1.405200e+04      0.000000             NaN             NaN
+75%     2020.030000  6.008800e+04      6.000000             NaN             NaN
+max     2023.060000  2.289999e+06      6.000000             NaN             NaN
+Period
+2012.09    462
+2011.06    460
+2015.06    460
+2018.06    460
+2018.03    460
+2017.12    460
+2017.09    460
+2011.09    460
+2017.03    460
+2016.12    460
+2016.09    460
+2016.06    460
+.......
+2021.06    387
+2021.09    387
+2021.12    387
+2022.03    387
+2022.06    387
+2022.09    387
+2022.12    387
+2023.03    387
+2023.06    387
+Name: count, dtype: int64
+
+2.Read csv file and plot graph using matplotlib.pyplot
+import pandas as pd
+import matplotlib.pyplot as plt
+DF = pd.read_csv("/Users/rohitbiswas/Downloads/Document/SUB/DAR/demo2.csv")
+DF.plot(x="Numeric", y=["Numeric-2"],kind="line", figsize=(6,8))
+plt.show()
+
+output:-
+*****graph in screen*****

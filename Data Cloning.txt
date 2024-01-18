@@ -1,0 +1,320 @@
+1.Data cloning process
+# perform the data cleaning process in python
+import pandas as pd
+import numpy as np
+data=pd.read_csv('/Users/rohitbiswas/Downloads/Document/SUB/DAR/employeesnew.csv')
+print("**True if there is any null value**\n")
+print(data.isnull())
+print("\n**Sum of null values in each column**\n")
+print(data.isnull().sum())
+print("\n**The Original Data**\n")
+print(data)
+
+print("\n**Data after removing column**\n")
+remove = ['EMPLOYEE_ID']
+data.drop(remove, inplace =True, axis =1)
+print(data)
+print("\n**Data after adding contents in column**\n")
+data['NAME'] = data['NAME'].fillna('Anu')
+print(data)
+
+print("\n**True if Duplicates found**\n")
+print(data.duplicated())
+print("\n**Data with Duplicates removed**\n")
+print(data.drop_duplicates())
+print("\n**Describe specific column**\n")
+print(data['NAME'].describe())
+print("\n**Data with Changed values in specific position**\n")
+data.loc[23,'SALARY'] = 90000
+print(data)
+print("\n**Data in lowercase**\n")
+data['NAME'] = data['NAME'].str.lower()
+print(data)
+print("\n**Data in title**\n")
+data['JOB_ID'] = data['JOB_ID'].str.title()
+print(data)
+
+'''**EXTRA**Not Neecessary**
+print(data.head())
+print(data.duplicated())
+print(data.info())
+# Categorical columns
+cat_col = [col for col in data.columns if data[col].dtype == 'object']
+print('Categorical columns :',cat_col)
+# Numerical columns
+num_col = [col for col in data.columns if data[col].dtype != 'object']
+print('Numerical columns :',num_col)
+print(data[cat_col].nunique())'''
+
+output:-
+**True if there is any null value**
+
+    EMPLOYEE_ID   NAME  PHONE_NUMBER  HIRE_DATE  JOB_ID  SALARY  MANAGER_ID
+0         False  False         False      False   False   False       False
+1         False  False         False      False   False   False       False
+2         False  False         False      False   False   False       False
+3         False  False         False      False   False   False       False
+4         False  False         False      False   False   False       False
+5         False  False         False      False   False   False       False
+6         False  False         False      False   False   False       False
+7         False  False         False      False   False   False       False
+8         False  False         False      False   False   False       False
+9         False  False         False      False   False   False       False
+10        False  False         False      False   False   False       False
+11        False  False         False      False   False   False       False
+12        False  False         False      False   False   False       False
+13        False  False         False      False   False   False       False
+14        False  False         False      False   False   False       False
+15        False  False         False      False   False   False       False
+16        False  False         False      False   False   False       False
+17        False  False         False      False   False   False       False
+18        False  False         False      False   False   False       False
+19        False  False         False      False   False   False       False
+20        False  False         False      False   False   False       False
+21        False  False          True      False   False   False       False
+22        False  False          True      False   False   False       False
+23         True   True         False      False    True   False       False
+
+**Sum of null values in each column**
+
+EMPLOYEE_ID     1
+NAME            1
+PHONE_NUMBER    2
+HIRE_DATE       0
+JOB_ID          1
+SALARY          0
+MANAGER_ID      0
+dtype: int64
+
+**The Original Data**
+
+    EMPLOYEE_ID      NAME  PHONE_NUMBER  ...    JOB_ID SALARY  MANAGER_ID
+0         198.0    Donald  650.507.9833  ...  SH_CLERK   2600         124
+1         199.0   Douglas  650.507.9844  ...  SH_CLERK   2600         124
+2         200.0  Jennifer  515.123.4444  ...   AD_ASST   4400         101
+3         201.0   Michael  515.123.5555  ...    MK_MAN  13000         100
+4         124.0     Kevin  650.123.5234  ...    ST_MAN   5800         100
+5         125.0     Julia  650.124.1214  ...  ST_CLERK   3200         120
+6         126.0     Irene  650.124.1224  ...  ST_CLERK   2700         120
+7         127.0     James  650.124.1334  ...  ST_CLERK   2400         120
+8         128.0    Steven  650.124.1434  ...  ST_CLERK   2200         120
+9         129.0     Laura  650.124.5234  ...  ST_CLERK   3300         121
+10        130.0     Mozhe  650.124.6234  ...  ST_CLERK   2800         121
+11        131.0     James  650.124.7234  ...  ST_CLERK   2500         121
+12        132.0        TJ  650.124.8234  ...  ST_CLERK   2100         121
+13        133.0     Jason  650.127.1934  ...  ST_CLERK   3300         122
+14        134.0   Michael  650.127.1834  ...  ST_CLERK   2900         122
+15        135.0        Ki  650.127.1734  ...  ST_CLERK   2400         122
+16        136.0     Hazel  650.127.1634  ...  ST_CLERK   2200         122
+17        137.0    Renske  650.121.1234  ...  ST_CLERK   3600         123
+18        138.0   Stephen  650.121.2034  ...  ST_CLERK   3200         123
+19        139.0      John  650.121.2019  ...  ST_CLERK   2700         123
+20        140.0    Joshua  650.121.1834  ...  ST_CLERK   2500         123
+21        141.0     Rohit           NaN  ...  ST_CLERK   2000         100
+22        141.0     Rohit           NaN  ...  ST_CLERK   2000         100
+23          NaN       NaN   650.121.654  ...       NaN  10000         100
+
+[24 rows x 7 columns]
+
+**Data after removing column**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     Donald  650.507.9833  21-Jun-07  SH_CLERK    2600         124
+1    Douglas  650.507.9844  13-Jan-08  SH_CLERK    2600         124
+2   Jennifer  515.123.4444  17-Sep-03   AD_ASST    4400         101
+3    Michael  515.123.5555  17-Feb-04    MK_MAN   13000         100
+4      Kevin  650.123.5234  16-Nov-07    ST_MAN    5800         100
+5      Julia  650.124.1214  16-Jul-05  ST_CLERK    3200         120
+6      Irene  650.124.1224  28-Sep-06  ST_CLERK    2700         120
+7      James  650.124.1334  14-Jan-07  ST_CLERK    2400         120
+8     Steven  650.124.1434  08-Mar-08  ST_CLERK    2200         120
+9      Laura  650.124.5234  20-Aug-05  ST_CLERK    3300         121
+10     Mozhe  650.124.6234  30-Oct-05  ST_CLERK    2800         121
+11     James  650.124.7234  16-Feb-05  ST_CLERK    2500         121
+12        TJ  650.124.8234  10-Apr-07  ST_CLERK    2100         121
+13     Jason  650.127.1934  14-Jun-04  ST_CLERK    3300         122
+14   Michael  650.127.1834  26-Aug-06  ST_CLERK    2900         122
+15        Ki  650.127.1734  12-Dec-07  ST_CLERK    2400         122
+16     Hazel  650.127.1634  06-Feb-08  ST_CLERK    2200         122
+17    Renske  650.121.1234  14-Jul-03  ST_CLERK    3600         123
+18   Stephen  650.121.2034  26-Oct-05  ST_CLERK    3200         123
+19      John  650.121.2019  12-Feb-06  ST_CLERK    2700         123
+20    Joshua  650.121.1834  06-Apr-06  ST_CLERK    2500         123
+21     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+22     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+23       NaN   650.121.654  18-Dec-03       NaN   10000         100
+
+**Data after adding contents in column**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     Donald  650.507.9833  21-Jun-07  SH_CLERK    2600         124
+1    Douglas  650.507.9844  13-Jan-08  SH_CLERK    2600         124
+2   Jennifer  515.123.4444  17-Sep-03   AD_ASST    4400         101
+3    Michael  515.123.5555  17-Feb-04    MK_MAN   13000         100
+4      Kevin  650.123.5234  16-Nov-07    ST_MAN    5800         100
+5      Julia  650.124.1214  16-Jul-05  ST_CLERK    3200         120
+6      Irene  650.124.1224  28-Sep-06  ST_CLERK    2700         120
+7      James  650.124.1334  14-Jan-07  ST_CLERK    2400         120
+8     Steven  650.124.1434  08-Mar-08  ST_CLERK    2200         120
+9      Laura  650.124.5234  20-Aug-05  ST_CLERK    3300         121
+10     Mozhe  650.124.6234  30-Oct-05  ST_CLERK    2800         121
+11     James  650.124.7234  16-Feb-05  ST_CLERK    2500         121
+12        TJ  650.124.8234  10-Apr-07  ST_CLERK    2100         121
+13     Jason  650.127.1934  14-Jun-04  ST_CLERK    3300         122
+14   Michael  650.127.1834  26-Aug-06  ST_CLERK    2900         122
+15        Ki  650.127.1734  12-Dec-07  ST_CLERK    2400         122
+16     Hazel  650.127.1634  06-Feb-08  ST_CLERK    2200         122
+17    Renske  650.121.1234  14-Jul-03  ST_CLERK    3600         123
+18   Stephen  650.121.2034  26-Oct-05  ST_CLERK    3200         123
+19      John  650.121.2019  12-Feb-06  ST_CLERK    2700         123
+20    Joshua  650.121.1834  06-Apr-06  ST_CLERK    2500         123
+21     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+22     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+23       Anu   650.121.654  18-Dec-03       NaN   10000         100
+
+**True if Duplicates found**
+
+0     False
+1     False
+2     False
+3     False
+4     False
+5     False
+6     False
+7     False
+8     False
+9     False
+10    False
+11    False
+12    False
+13    False
+14    False
+15    False
+16    False
+17    False
+18    False
+19    False
+20    False
+21    False
+22     True
+23    False
+dtype: bool
+
+**Data with Duplicates removed**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     Donald  650.507.9833  21-Jun-07  SH_CLERK    2600         124
+1    Douglas  650.507.9844  13-Jan-08  SH_CLERK    2600         124
+2   Jennifer  515.123.4444  17-Sep-03   AD_ASST    4400         101
+3    Michael  515.123.5555  17-Feb-04    MK_MAN   13000         100
+4      Kevin  650.123.5234  16-Nov-07    ST_MAN    5800         100
+5      Julia  650.124.1214  16-Jul-05  ST_CLERK    3200         120
+6      Irene  650.124.1224  28-Sep-06  ST_CLERK    2700         120
+7      James  650.124.1334  14-Jan-07  ST_CLERK    2400         120
+8     Steven  650.124.1434  08-Mar-08  ST_CLERK    2200         120
+9      Laura  650.124.5234  20-Aug-05  ST_CLERK    3300         121
+10     Mozhe  650.124.6234  30-Oct-05  ST_CLERK    2800         121
+11     James  650.124.7234  16-Feb-05  ST_CLERK    2500         121
+12        TJ  650.124.8234  10-Apr-07  ST_CLERK    2100         121
+13     Jason  650.127.1934  14-Jun-04  ST_CLERK    3300         122
+14   Michael  650.127.1834  26-Aug-06  ST_CLERK    2900         122
+15        Ki  650.127.1734  12-Dec-07  ST_CLERK    2400         122
+16     Hazel  650.127.1634  06-Feb-08  ST_CLERK    2200         122
+17    Renske  650.121.1234  14-Jul-03  ST_CLERK    3600         123
+18   Stephen  650.121.2034  26-Oct-05  ST_CLERK    3200         123
+19      John  650.121.2019  12-Feb-06  ST_CLERK    2700         123
+20    Joshua  650.121.1834  06-Apr-06  ST_CLERK    2500         123
+21     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+23       Anu   650.121.654  18-Dec-03       NaN   10000         100
+
+**Describe specific column**
+
+count        24
+unique       21
+top       Rohit
+freq          2
+Name: NAME, dtype: object
+
+**Data with Changed values in specific position**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     Donald  650.507.9833  21-Jun-07  SH_CLERK    2600         124
+1    Douglas  650.507.9844  13-Jan-08  SH_CLERK    2600         124
+2   Jennifer  515.123.4444  17-Sep-03   AD_ASST    4400         101
+3    Michael  515.123.5555  17-Feb-04    MK_MAN   13000         100
+4      Kevin  650.123.5234  16-Nov-07    ST_MAN    5800         100
+5      Julia  650.124.1214  16-Jul-05  ST_CLERK    3200         120
+6      Irene  650.124.1224  28-Sep-06  ST_CLERK    2700         120
+7      James  650.124.1334  14-Jan-07  ST_CLERK    2400         120
+8     Steven  650.124.1434  08-Mar-08  ST_CLERK    2200         120
+9      Laura  650.124.5234  20-Aug-05  ST_CLERK    3300         121
+10     Mozhe  650.124.6234  30-Oct-05  ST_CLERK    2800         121
+11     James  650.124.7234  16-Feb-05  ST_CLERK    2500         121
+12        TJ  650.124.8234  10-Apr-07  ST_CLERK    2100         121
+13     Jason  650.127.1934  14-Jun-04  ST_CLERK    3300         122
+14   Michael  650.127.1834  26-Aug-06  ST_CLERK    2900         122
+15        Ki  650.127.1734  12-Dec-07  ST_CLERK    2400         122
+16     Hazel  650.127.1634  06-Feb-08  ST_CLERK    2200         122
+17    Renske  650.121.1234  14-Jul-03  ST_CLERK    3600         123
+18   Stephen  650.121.2034  26-Oct-05  ST_CLERK    3200         123
+19      John  650.121.2019  12-Feb-06  ST_CLERK    2700         123
+20    Joshua  650.121.1834  06-Apr-06  ST_CLERK    2500         123
+21     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+22     Rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+23       Anu   650.121.654  18-Dec-03       NaN   90000         100
+
+**Data in lowercase**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     donald  650.507.9833  21-Jun-07  SH_CLERK    2600         124
+1    douglas  650.507.9844  13-Jan-08  SH_CLERK    2600         124
+2   jennifer  515.123.4444  17-Sep-03   AD_ASST    4400         101
+3    michael  515.123.5555  17-Feb-04    MK_MAN   13000         100
+4      kevin  650.123.5234  16-Nov-07    ST_MAN    5800         100
+5      julia  650.124.1214  16-Jul-05  ST_CLERK    3200         120
+6      irene  650.124.1224  28-Sep-06  ST_CLERK    2700         120
+7      james  650.124.1334  14-Jan-07  ST_CLERK    2400         120
+8     steven  650.124.1434  08-Mar-08  ST_CLERK    2200         120
+9      laura  650.124.5234  20-Aug-05  ST_CLERK    3300         121
+10     mozhe  650.124.6234  30-Oct-05  ST_CLERK    2800         121
+11     james  650.124.7234  16-Feb-05  ST_CLERK    2500         121
+12        tj  650.124.8234  10-Apr-07  ST_CLERK    2100         121
+13     jason  650.127.1934  14-Jun-04  ST_CLERK    3300         122
+14   michael  650.127.1834  26-Aug-06  ST_CLERK    2900         122
+15        ki  650.127.1734  12-Dec-07  ST_CLERK    2400         122
+16     hazel  650.127.1634  06-Feb-08  ST_CLERK    2200         122
+17    renske  650.121.1234  14-Jul-03  ST_CLERK    3600         123
+18   stephen  650.121.2034  26-Oct-05  ST_CLERK    3200         123
+19      john  650.121.2019  12-Feb-06  ST_CLERK    2700         123
+20    joshua  650.121.1834  06-Apr-06  ST_CLERK    2500         123
+21     rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+22     rohit           NaN  06-Mar-13  ST_CLERK    2000         100
+23       anu   650.121.654  18-Dec-03       NaN   90000         100
+
+**Data in title**
+
+        NAME  PHONE_NUMBER  HIRE_DATE    JOB_ID  SALARY  MANAGER_ID
+0     donald  650.507.9833  21-Jun-07  Sh_Clerk    2600         124
+1    douglas  650.507.9844  13-Jan-08  Sh_Clerk    2600         124
+2   jennifer  515.123.4444  17-Sep-03   Ad_Asst    4400         101
+3    michael  515.123.5555  17-Feb-04    Mk_Man   13000         100
+4      kevin  650.123.5234  16-Nov-07    St_Man    5800         100
+5      julia  650.124.1214  16-Jul-05  St_Clerk    3200         120
+6      irene  650.124.1224  28-Sep-06  St_Clerk    2700         120
+7      james  650.124.1334  14-Jan-07  St_Clerk    2400         120
+8     steven  650.124.1434  08-Mar-08  St_Clerk    2200         120
+9      laura  650.124.5234  20-Aug-05  St_Clerk    3300         121
+10     mozhe  650.124.6234  30-Oct-05  St_Clerk    2800         121
+11     james  650.124.7234  16-Feb-05  St_Clerk    2500         121
+12        tj  650.124.8234  10-Apr-07  St_Clerk    2100         121
+13     jason  650.127.1934  14-Jun-04  St_Clerk    3300         122
+14   michael  650.127.1834  26-Aug-06  St_Clerk    2900         122
+15        ki  650.127.1734  12-Dec-07  St_Clerk    2400         122
+16     hazel  650.127.1634  06-Feb-08  St_Clerk    2200         122
+17    renske  650.121.1234  14-Jul-03  St_Clerk    3600         123
+18   stephen  650.121.2034  26-Oct-05  St_Clerk    3200         123
+19      john  650.121.2019  12-Feb-06  St_Clerk    2700         123
+20    joshua  650.121.1834  06-Apr-06  St_Clerk    2500         123
+21     rohit           NaN  06-Mar-13  St_Clerk    2000         100
+22     rohit           NaN  06-Mar-13  St_Clerk    2000         100
+23       anu   650.121.654  18-Dec-03       NaN   90000         100
